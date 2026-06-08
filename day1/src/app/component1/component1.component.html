@@ -1,7 +1,13 @@
 <h3 class="format">Hello Angular</h3>
 <h5>id: {{id}}</h5>
 <h5>username: {{username}}</h5>
-<h5>status: {{status ? "active" : "inactive"}}</h5>
+<h5>status:
+  @if (status) {
+    <span class="format">active</span>
+  } @else {
+    <span>inactive</span>
+  }
+</h5>
 <h5>phone: {{phone}}</h5>
 <h5>quantity: {{quantity}}</h5>
 <h5>price: {{price}}</h5>
@@ -9,3 +15,27 @@
 <h5>photo1: <img src="CV.jpg" height="100" alt="Dave"></h5>
 <h5>photo2: <img src="{{photo}}" height="{{height}}" alt="Dave"></h5>
 <h5>photo3: <img [src]="photo" [height]="height" alt="Dave"></h5>
+<h5>Xếp loại:
+  @if (score < 5) {
+    <span>Kém</span>
+  } @else if (score < 6.5) {
+    <span>Trung bình</span>
+  } @else if (score < 8) {
+    <span>Khá</span>
+  } @else {
+    <span class="format">Giỏi</span>
+  }
+</h5>
+<h5>Danh sách sinh viên:</h5>
+<ul style="list-style: none; padding: 0;">
+  @for (name of names; track name; let i = $index, first = $first) {
+    <li>{{i + 1}}. {{name}}</li>
+  }
+</ul>
+<h5>Danh sách ảnh: </h5>
+<ul style="list-style: none; padding: 0;">
+  @for (photo of photos; track photo; let i = $index) {
+    <li>{{i + 1}}. <img [src]="photo" [height]="height" alt="Dave"></li>
+  }
+</ul>
+

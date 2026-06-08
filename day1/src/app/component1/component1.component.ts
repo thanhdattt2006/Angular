@@ -19,6 +19,9 @@ export class Component1Component implements OnInit {
   total: number;
   photo: string;
   height: number;
+  score: number;
+  names: string[];
+  photos: string[];
 
   ngOnInit() {
     this.username = "Dave"
@@ -28,5 +31,8 @@ export class Component1Component implements OnInit {
     this.total = this.quantity * this.price;
     this.photo = "CV.jpg";
     this.height = 100;
+    this.score = 8;
+    this.names = ["Dave", "David", "John", "Jane", "Bob"];
+    this.photos = ["CV.jpg", "CV-img.jpg", "Obito-img.jpg"];
   }
 }
