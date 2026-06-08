@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Product } from "../entities/product.entity";
 
 @Component({
   selector: 'app-root',
@@ -22,6 +23,7 @@ export class Component1Component implements OnInit {
   score: number;
   names: string[];
   photos: string[];
+  product: Product;
 
   ngOnInit() {
     this.username = "Dave"
@@ -34,5 +36,6 @@ export class Component1Component implements OnInit {
     this.score = 8;
     this.names = ["Dave", "David", "John", "Jane", "Bob"];
     this.photos = ["CV.jpg", "CV-img.jpg", "Obito-img.jpg"];
+    this.product = new Product(1, "Dave", "hi", 3, 4, "Obito-img.jpg", true);
   }
 }

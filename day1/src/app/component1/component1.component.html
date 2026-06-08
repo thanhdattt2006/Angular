@@ -39,3 +39,25 @@
   }
 </ul>
 
+<h3>Product info</h3>
+<table border="1">
+  <tr>
+    <th>id</th>
+    <th>name</th>
+    <th>description</th>
+    <th>price</th>
+    <th>quantity</th>
+    <th>photo</th>
+    <th>status</th>
+  </tr>
+  <tr>
+    <td>{{product.id}}</td>
+    <td>{{product.name}}</td>
+    <td>{{product.description}}</td>
+    <td>{{product.price}}</td>
+    <td>{{product.quantity}}</td>
+    <td><img [src]="product.photo" [height]="height" alt="Dave"></td>
+    <td>{{product.status ? "available" : "unavailable"}}</td>
+  </tr>
+</table>
+
