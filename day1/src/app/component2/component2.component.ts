@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { DemoService } from "../service/demo.service";
 import { CaculateService } from "../service/caculate.service";
 import { RectangleService } from "../service/rectangle.service";
@@ -11,7 +11,7 @@ import { ProdcuctService } from "../service/product.service";
   // styleUrls: ['./component2.component.css']
 })
 
-export class Component2Component {
+export class Component2Component implements OnInit {
   result1: string;
   result2: string;
   result3: number;

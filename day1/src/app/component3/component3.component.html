@@ -1,0 +1,107 @@
+<div class="max-w-md mx-auto my-12 p-8 rounded-2xl shadow-lg border border-slate-200 bg-white text-center font-sans">
+  <h3 class="text-slate-800 mt-0 mb-6 text-2xl font-bold border-b-2 border-blue-500 pb-2 inline-block">
+    Two-Way Data Binding
+  </h3>
+  
+  <div class="mb-6 text-left">
+    <label class="block mb-2 text-slate-600 font-semibold text-sm">Nhập tên của bạn:</label>
+    <input type="text" 
+           [(ngModel)]="name" 
+           placeholder="Nhập chữ vào đây..." 
+           class="w-full py-3 px-4 rounded-lg border-2 border-slate-300 text-base outline-none box-border transition-colors duration-200 focus:border-blue-500 mb-4">
+    
+    <!-- Gender Selection Radio Buttons -->
+    <label class="block mb-2 text-slate-600 font-semibold text-sm">Chọn giới tính:</label>
+    <div class="flex gap-4">
+      <label class="flex items-center gap-2 cursor-pointer text-slate-700 text-sm">
+        <input type="radio" name="gender" value="Male" [(ngModel)]="gender" class="w-4 h-4 accent-blue-500">
+        <span>Nam</span>
+      </label>
+      <label class="flex items-center gap-2 cursor-pointer text-slate-700 text-sm">
+        <input type="radio" name="gender" value="Female" [(ngModel)]="gender" class="w-4 h-4 accent-blue-500">
+        <span>Nữ</span>
+      </label>
+      <label class="flex items-center gap-2 cursor-pointer text-slate-700 text-sm">
+        <input type="radio" name="gender" value="Other" [(ngModel)]="gender" class="w-4 h-4 accent-blue-500">
+        <span>Khác</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="p-5 bg-blue-50 rounded-xl border border-dashed border-blue-200 min-h-[80px] flex flex-col items-center justify-center">
+    <h1 class="text-blue-700 m-0 text-3xl break-all font-bold">
+      @if (name) {
+        {{name}}
+      } @else {
+        <span class="text-slate-400 text-base font-normal italic">Tên hiển thị thời gian thực...</span>
+      }
+    </h1>
+    <div class="text-blue-500 font-semibold text-sm mt-2 flex items-center gap-1.5">
+      <span>Giới tính:</span>
+      @if (gender === 'Male') {
+        <span class="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-bold flex items-center gap-1">Nam 🚹</span>
+      } @else if (gender === 'Female') {
+        <span class="bg-pink-100 text-pink-700 px-2 py-0.5 rounded text-xs font-bold flex items-center gap-1">Nữ 🚺</span>
+      } @else {
+        <span class="bg-slate-100 text-slate-700 px-2 py-0.5 rounded text-xs font-bold flex items-center gap-1">Khác ⚧</span>
+      }
+    </div>
+  </div>
+</div>
+
+<div class="max-w-md mx-auto my-8 p-8 rounded-2xl shadow-lg border border-slate-200 bg-white text-center font-sans">
+  <h3 class="text-slate-800 mt-0 mb-6 text-2xl font-bold border-b-2 border-red-500 pb-2 inline-block">
+    Dynamic Image Resizer
+  </h3>
+
+  <!-- Image Selector Dropdown -->
+  <div class="mb-6 text-left">
+    <label class="block mb-2 text-slate-600 font-semibold text-sm">Chọn ảnh hiển thị:</label>
+    <select [(ngModel)]="img" 
+            class="w-full py-2.5 px-3 rounded-lg border-2 border-slate-300 text-base outline-none box-border transition-colors duration-200 focus:border-red-500 bg-white cursor-pointer">
+      <option value="">-- Chọn ảnh --</option>
+      <option value="Obito-img.jpg">Obito</option>
+      <option value="CV.jpg">CV Document</option>
+      <option value="CV-img.jpg">CV Profile</option>
+    </select>
+  </div>
+
+  <!-- Status Checkbox Toggle -->
+  <div class="mb-6 flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-200">
+    <span class="text-slate-700 font-semibold text-sm">Hiển thị ảnh (Status):</span>
+    <label class="relative inline-flex items-center cursor-pointer">
+      <input type="checkbox" [(ngModel)]="status" class="sr-only peer">
+      <div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-500"></div>
+    </label>
+  </div>
+
+  <!-- Size Slider -->
+  <div class="mb-6 text-left">
+    <div class="flex justify-between items-center mb-2">
+      <label class="text-slate-600 font-semibold text-sm">Kích thước ảnh (Size):</label>
+      <span class="text-red-600 font-bold text-sm bg-red-50 px-2 py-0.5 rounded">{{size}}px</span>
+    </div>
+    <input type="range" 
+           [(ngModel)]="size" 
+           min="10" 
+           max="500" 
+           class="w-full accent-red-500 cursor-pointer">
+  </div>
+
+  <!-- Image Preview Panel -->
+  <div class="p-5 bg-amber-50 rounded-xl border border-dashed border-amber-200 min-h-[150px] flex items-center justify-center overflow-auto max-h-[400px]">
+    @if (status) {
+      @if (img) {
+        <img [src]="img" 
+             [width]="size" 
+             [height]="size" 
+             class="rounded-lg border-4 border-amber-600 shadow-md transition-all duration-200"
+             alt="Selected Image">
+      } @else {
+        <div class="text-slate-400 text-sm italic py-8">Vui lòng chọn một ảnh phía trên để bắt đầu chỉnh size...</div>
+      }
+    } @else {
+      <div class="text-slate-400 text-sm italic py-8 font-semibold">Ảnh đã bị ẩn (Status = False)</div>
+    }
+  </div>
+</div>
