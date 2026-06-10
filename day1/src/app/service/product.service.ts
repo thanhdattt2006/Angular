@@ -18,4 +18,8 @@ export class ProdcuctService {
   findById(id: number) {
     return this.products.find(p => p.id == id);
   }
+
+  findAll() {
+    return this.products;
+  }
 }

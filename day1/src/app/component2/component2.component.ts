@@ -21,6 +21,7 @@ export class Component2Component {
   result7: number;
   result8: number;
   result9: Product;
+  result10: Product[];
 
   constructor(private demoService: DemoService
     , private caculateService: CaculateService
@@ -37,5 +38,6 @@ export class Component2Component {
     this.result7 = this.rectangleService.area(2, 3);
     this.result8 = this.rectangleService.perimeter(2, 3);
     this.result9 = this.productService.findById(3);
+    this.result10 = this.productService.findAll();
   }
 } 
