@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
+import { Cert } from "../entities/cert.entity";
+import { CertService } from "../service/cert.service";
 
 @Component({
   selector: 'app-root',
@@ -13,6 +15,11 @@ export class Component3Component implements OnInit {
   img: string;
   status: boolean;
   gender: string;
+  cert: Cert;
+  certs: Cert[];
+  selectedCertId: number;
+
+  constructor(private certService: CertService) { }
 
   ngOnInit() {
     this.name = 'A';
@@ -20,5 +27,12 @@ export class Component3Component implements OnInit {
     this.img = '';
     this.status = true;
     this.gender = 'Male';
+    this.cert = this.certService.findById(2);
+    this.certs = this.certService.findAll();
+    this.selectedCertId = 1;
+  }
+
+  get selectedCert(): Cert | undefined {
+    return this.certs.find(c => c.id == this.selectedCertId);
   }
 }

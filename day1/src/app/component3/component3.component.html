@@ -105,3 +105,54 @@
     }
   </div>
 </div>
+
+<div class="max-w-md mx-auto my-8 p-8 rounded-2xl shadow-lg border border-slate-200 bg-white text-center font-sans">
+  <h3 class="text-slate-800 mt-0 mb-6 text-2xl font-bold border-b-2 border-indigo-500 pb-2 inline-block">
+    Certificate Manager
+  </h3>
+
+  <!-- 1. Display Single Default Certificate (cert: Cert) -->
+  <div class="mb-6 text-left">
+    <span class="block mb-2 text-slate-500 font-bold uppercase text-[11px] tracking-wider">Default Certificate (ID = 2):</span>
+    @if (cert) {
+      <div class="p-4 bg-indigo-50 border border-indigo-100 rounded-xl">
+        <div class="text-sm font-bold text-indigo-900">{{cert.name}}</div>
+        <div class="text-xs text-indigo-700 mt-1">{{cert.description}}</div>
+        <div class="mt-2.5 inline-block bg-indigo-200 text-indigo-800 text-[10px] font-bold px-2 py-0.5 rounded-full">
+          Type: {{cert.type}}
+        </div>
+      </div>
+    } @else {
+      <div class="text-slate-400 text-sm italic">Không tìm thấy chứng chỉ mặc định.</div>
+    }
+  </div>
+
+  <div class="flex items-center my-6">
+    <div class="flex-grow border-t border-slate-100"></div>
+    <span class="mx-3 text-slate-300 text-xs font-semibold uppercase">Tìm kiếm</span>
+    <div class="flex-grow border-t border-slate-100"></div>
+  </div>
+
+  <!-- 2. Select Dropdown for All Certificates (findAll) -->
+  <div class="text-left">
+    <label class="block mb-2 text-slate-600 font-semibold text-sm">Chọn chứng chỉ để xem chi tiết:</label>
+    <select [(ngModel)]="selectedCertId" 
+            class="w-full py-2.5 px-3 rounded-lg border-2 border-slate-300 text-base outline-none box-border transition-colors duration-200 focus:border-indigo-500 bg-white cursor-pointer mb-4">
+      @for (c of certs; track c.id) {
+        <option [value]="c.id">{{c.name}}</option>
+      }
+    </select>
+
+    @if (selectedCert) {
+      <div class="p-4 bg-emerald-50 border border-emerald-100 rounded-xl transition-all duration-200">
+        <div class="flex justify-between items-center">
+          <span class="text-sm font-bold text-emerald-900">{{selectedCert.name}}</span>
+          <span class="bg-emerald-200 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full">
+            {{selectedCert.type}}
+          </span>
+        </div>
+        <div class="text-xs text-emerald-700 mt-2">{{selectedCert.description}}</div>
+      </div>
+    }
+  </div>
+</div>
