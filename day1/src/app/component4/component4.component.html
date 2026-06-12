@@ -90,19 +90,19 @@
       <label class="block mb-2 text-slate-500 font-semibold text-xs uppercase tracking-wide">Chọn hình ảnh:</label>
       <div class="flex gap-3 mb-4 justify-start">
         <img src="Obito-img.jpg" 
-             (click)="selectedImg = 'Obito-img.jpg'"
+             (click)="selectImage('Obito-img.jpg')"
              class="w-16 h-16 rounded-xl object-cover cursor-pointer border-2 transition-all duration-200 transform hover:scale-105"
              [class.border-indigo-500]="selectedImg === 'Obito-img.jpg'"
              [class.border-transparent]="selectedImg !== 'Obito-img.jpg'"
              alt="Obito">
         <img src="CV.jpg" 
-             (click)="selectedImg = 'CV.jpg'"
+             (click)="selectImage('CV.jpg')"
              class="w-16 h-16 rounded-xl object-cover cursor-pointer border-2 transition-all duration-200 transform hover:scale-105"
              [class.border-indigo-500]="selectedImg === 'CV.jpg'"
              [class.border-transparent]="selectedImg !== 'CV.jpg'"
              alt="CV">
         <img src="CV-img.jpg" 
-             (click)="selectedImg = 'CV-img.jpg'"
+             (click)="selectImage('CV-img.jpg')"
              class="w-16 h-16 rounded-xl object-cover cursor-pointer border-2 transition-all duration-200 transform hover:scale-105"
              [class.border-indigo-500]="selectedImg === 'CV-img.jpg'"
              [class.border-transparent]="selectedImg !== 'CV-img.jpg'"
@@ -137,8 +137,141 @@
         <img [src]="selectedImg" 
              [style.width.px]="imgWidth" 
              [style.height.px]="imgHeight"
-             class="rounded-xl shadow-lg border-2 border-white object-cover transition-all duration-300" 
+             class="rounded-xl shadow-lg border-2 border-white object-cover transition-all duration-300 main-image" 
              alt="Selected Image">
+      </div>
+    </div>
+
+    <!-- 4. Temperature Converter Section -->
+    <div class="mt-8 pt-8 border-t border-slate-100 text-left">
+      <h4 class="text-slate-700 font-bold text-xs mb-4 uppercase tracking-wider">4. Temperature Converter</h4>
+      
+      <!-- Select conversion direction -->
+      <div class="mb-4">
+        <label class="block mb-2 text-slate-500 font-semibold text-xs uppercase tracking-wide">Kiểu chuyển đổi:</label>
+        <div class="flex gap-3">
+          <button type="button" 
+                  (click)="tempType = 'C_TO_F'; convertTemp()"
+                  class="flex-1 py-2 px-3 font-semibold rounded-xl border transition-all duration-200 text-xs shadow-sm"
+                  [class.bg-indigo-600]="tempType === 'C_TO_F'"
+                  [class.text-white]="tempType === 'C_TO_F'"
+                  [class.border-indigo-600]="tempType === 'C_TO_F'"
+                  [class.bg-indigo-50]="tempType !== 'C_TO_F'"
+                  [class.text-indigo-700]="tempType !== 'C_TO_F'"
+                  [class.border-indigo-100]="tempType !== 'C_TO_F'">
+            °C sang °F
+          </button>
+          <button type="button" 
+                  (click)="tempType = 'F_TO_C'; convertTemp()"
+                  class="flex-1 py-2 px-3 font-semibold rounded-xl border transition-all duration-200 text-xs shadow-sm"
+                  [class.bg-indigo-600]="tempType === 'F_TO_C'"
+                  [class.text-white]="tempType === 'F_TO_C'"
+                  [class.border-indigo-600]="tempType === 'F_TO_C'"
+                  [class.bg-indigo-50]="tempType !== 'F_TO_C'"
+                  [class.text-indigo-700]="tempType !== 'F_TO_C'"
+                  [class.border-indigo-100]="tempType !== 'F_TO_C'">
+            °F sang °C
+          </button>
+        </div>
+      </div>
+
+      <!-- Temperature input -->
+      <div class="mb-4">
+        <label class="block mb-2 text-slate-500 font-semibold text-xs uppercase tracking-wide">Nhập nhiệt độ:</label>
+        <input type="number" 
+               [(ngModel)]="tempInput" 
+               (ngModelChange)="convertTemp()"
+               placeholder="Nhập nhiệt độ..." 
+               class="w-full py-2.5 px-4 rounded-xl border-2 border-slate-200 text-sm outline-none transition-colors duration-200 focus:border-indigo-500 text-slate-700 font-bold">
+      </div>
+
+      <!-- Result Panel -->
+      <div class="p-4 bg-indigo-50/50 rounded-2xl border border-indigo-100 flex flex-col items-center justify-center text-center">
+        <span class="text-xs text-indigo-500 font-semibold uppercase tracking-wider mb-1">Kết quả chuyển đổi:</span>
+        <div class="text-2xl font-black text-indigo-900">
+          {{ tempResult }} 
+          @if (tempType === 'C_TO_F') {
+            °F
+          } @else {
+            °C
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Grade Calculator Section -->
+    <div class="mt-8 pt-8 border-t border-slate-100 text-left">
+      <h4 class="text-slate-700 font-bold text-xs mb-4 uppercase tracking-wider">5. Grade Calculator</h4>
+      
+      <!-- Math Input -->
+      <div class="mb-4">
+        <div class="flex justify-between items-center mb-1.5">
+          <label class="text-slate-500 font-semibold text-xs uppercase tracking-wide">Điểm Toán:</label>
+          @if (mathScore > 10) {
+            <span class="text-rose-500 text-[10px] font-bold animate-pulse">Tối đa là 10 điểm!</span>
+          }
+        </div>
+        <input type="number" 
+               [(ngModel)]="mathScore" 
+               (ngModelChange)="calculateGrade()"
+               min="0"
+               max="10"
+               placeholder="Nhập điểm Toán..." 
+               class="w-full py-2.5 px-4 rounded-xl border-2 border-slate-200 text-sm outline-none transition-colors duration-200 focus:border-indigo-500 text-slate-700 font-semibold">
+      </div>
+
+      <!-- Physics Input -->
+      <div class="mb-4">
+        <div class="flex justify-between items-center mb-1.5">
+          <label class="text-slate-500 font-semibold text-xs uppercase tracking-wide">Điểm Lý:</label>
+          @if (physicsScore > 10) {
+            <span class="text-rose-500 text-[10px] font-bold animate-pulse">Tối đa là 10 điểm!</span>
+          }
+        </div>
+        <input type="number" 
+               [(ngModel)]="physicsScore" 
+               (ngModelChange)="calculateGrade()"
+               min="0"
+               max="10"
+               placeholder="Nhập điểm Lý..." 
+               class="w-full py-2.5 px-4 rounded-xl border-2 border-slate-200 text-sm outline-none transition-colors duration-200 focus:border-indigo-500 text-slate-700 font-semibold">
+      </div>
+
+      <!-- Chemistry Input -->
+      <div class="mb-4">
+        <div class="flex justify-between items-center mb-1.5">
+          <label class="text-slate-500 font-semibold text-xs uppercase tracking-wide">Điểm Hóa:</label>
+          @if (chemistryScore > 10) {
+            <span class="text-rose-500 text-[10px] font-bold animate-pulse">Tối đa là 10 điểm!</span>
+          }
+        </div>
+        <input type="number" 
+               [(ngModel)]="chemistryScore" 
+               (ngModelChange)="calculateGrade()"
+               min="0"
+               max="10"
+               placeholder="Nhập điểm Hóa..." 
+               class="w-full py-2.5 px-4 rounded-xl border-2 border-slate-200 text-sm outline-none transition-colors duration-200 focus:border-indigo-500 text-slate-700 font-semibold">
+      </div>
+
+      <!-- Result Panel -->
+      <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col items-center justify-center text-center">
+        <div class="flex justify-between items-center w-full mb-2.5 border-b border-slate-200 pb-2.5">
+          <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Điểm Trung Bình:</span>
+          <span class="text-lg font-black text-slate-800">{{ averageScore }}</span>
+        </div>
+        <div class="flex justify-between items-center w-full">
+          <span class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Xếp Loại:</span>
+          @if (gradeClassification === 'Giỏi') {
+            <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full border border-emerald-200">Giỏi 🏆</span>
+          } @else if (gradeClassification === 'Khá') {
+            <span class="bg-blue-100 text-blue-800 text-xs font-bold px-3 py-1 rounded-full border border-blue-200">Khá 👍</span>
+          } @else if (gradeClassification === 'Trung bình') {
+            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-3 py-1 rounded-full border border-amber-200">Trung bình ⚖️</span>
+          } @else {
+            <span class="bg-rose-100 text-rose-800 text-xs font-bold px-3 py-1 rounded-full border border-rose-200">Yếu ❌</span>
+          }
+        </div>
       </div>
     </div>
   </div>
