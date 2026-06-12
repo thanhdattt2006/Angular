@@ -2,6 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Cert } from "../entities/cert.entity";
 import { CertService } from "../service/cert.service";
+import { Role } from "../entities/role.entity";
+import { RoleService } from "../service/role.service";
 
 @Component({
   selector: 'app-root',
@@ -19,7 +21,14 @@ export class Component3Component implements OnInit {
   certs: Cert[];
   selectedCertId: number;
 
-  constructor(private certService: CertService) { }
+  role: Role;
+  roles: Role[];
+  selectedRoleId: number;
+
+  constructor(
+    private certService: CertService,
+    private roleService: RoleService
+  ) { }
 
   ngOnInit() {
     this.name = 'A';
@@ -30,9 +39,17 @@ export class Component3Component implements OnInit {
     this.cert = this.certService.findById(2);
     this.certs = this.certService.findAll();
     this.selectedCertId = 1;
+
+    this.role = this.roleService.findById(2);
+    this.roles = this.roleService.findAll();
+    this.selectedRoleId = 1;
   }
 
   get selectedCert(): Cert | undefined {
     return this.certs.find(c => c.id == this.selectedCertId);
+  }
+
+  get selectedRole(): Role | undefined {
+    return this.roles.find(r => r.id == this.selectedRoleId);
   }
 }

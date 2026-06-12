@@ -156,3 +156,46 @@
     }
   </div>
 </div>
+
+<div class="max-w-md mx-auto my-8 p-8 rounded-2xl shadow-lg border border-slate-200 bg-white text-center font-sans">
+  <h3 class="text-slate-800 mt-0 mb-6 text-2xl font-bold border-b-2 border-purple-500 pb-2 inline-block">
+    Role Manager
+  </h3>
+
+  <!-- 1. Display Single Default Role (role: Role) -->
+  <div class="mb-6 text-left">
+    <span class="block mb-2 text-slate-500 font-bold uppercase text-[11px] tracking-wider">Default Role (ID = 2):</span>
+    @if (role) {
+      <div class="p-4 bg-purple-50 border border-purple-100 rounded-xl">
+        <div class="text-sm font-bold text-purple-900">{{role.name}}</div>
+      </div>
+    } @else {
+      <div class="text-slate-400 text-sm italic">Không tìm thấy vai trò mặc định.</div>
+    }
+  </div>
+
+  <div class="flex items-center my-6">
+    <div class="flex-grow border-t border-slate-100"></div>
+    <span class="mx-3 text-slate-300 text-xs font-semibold uppercase">Tìm kiếm</span>
+    <div class="flex-grow border-t border-slate-100"></div>
+  </div>
+
+  <!-- 2. Select Dropdown for All Roles (findAll) -->
+  <div class="text-left">
+    <label class="block mb-2 text-slate-600 font-semibold text-sm">Chọn vai trò để xem chi tiết:</label>
+    <select [(ngModel)]="selectedRoleId" 
+            class="w-full py-2.5 px-3 rounded-lg border-2 border-slate-300 text-base outline-none box-border transition-colors duration-200 focus:border-purple-500 bg-white cursor-pointer mb-4">
+      @for (r of roles; track r.id) {
+        <option [value]="r.id">{{r.name}}</option>
+      }
+    </select>
+
+    @if (selectedRole) {
+      <div class="p-4 bg-emerald-50 border border-emerald-100 rounded-xl transition-all duration-200">
+        <div class="flex justify-between items-center">
+          <span class="text-sm font-bold text-emerald-900">{{selectedRole.name}}</span>
+        </div>
+      </div>
+    }
+  </div>
+</div>

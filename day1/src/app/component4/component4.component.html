@@ -1,0 +1,175 @@
+<div class="min-h-screen flex items-center justify-center p-6 transition-all duration-500" [style.backgroundColor]="bgColor">
+  <div class="max-w-md w-full p-8 rounded-3xl shadow-2xl border border-slate-100 bg-white/95 backdrop-blur-md text-center font-sans">
+    <h3 class="text-slate-800 mt-0 mb-6 text-2xl font-extrabold tracking-tight border-b-2 border-blue-500 pb-3 inline-block">
+      Interactive Click Events
+    </h3>
+    
+    <div class="mb-8 text-left">
+      <h4 class="text-slate-700 font-bold text-xs mb-3 uppercase tracking-wider">1. Click Me Event</h4>
+      <button type="button" 
+              (click)="clickMe()" 
+              class="w-full py-3 px-6 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl shadow-md transition-all duration-200 transform hover:-translate-y-0.5 active:translate-y-0 active:scale-95">
+        Click Me
+      </button>
+    </div>
+
+    <div class="text-left">
+      <h4 class="text-slate-700 font-bold text-xs mb-4 uppercase tracking-wider">2. Change Background Color</h4>
+      <div class="grid grid-cols-3 gap-3">
+        <!-- White/Default -->
+        <button type="button" 
+                value="#f8fafc" 
+                (click)="ChangeBg($event)" 
+                class="py-2.5 px-4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-xl border border-slate-200 transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm">
+          Slate
+        </button>
+        <!-- Blue -->
+        <button type="button" 
+                value="#3b82f6" 
+                (click)="ChangeBg($event)" 
+                class="py-2.5 px-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm">
+          Blue
+        </button>
+        <!-- Green -->
+        <button type="button" 
+                value="#10b981" 
+                (click)="ChangeBg($event)" 
+                class="py-2.5 px-4 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm">
+          Green
+        </button>
+        <!-- Red -->
+        <button type="button" 
+                value="#ef4444" 
+                (click)="ChangeBg($event)" 
+                class="py-2.5 px-4 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm">
+          Red
+        </button>
+        <!-- Purple -->
+        <button type="button" 
+                value="#8b5cf6" 
+                (click)="ChangeBg($event)" 
+                class="py-2.5 px-4 bg-purple-500 hover:bg-purple-600 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm">
+          Purple
+        </button>
+        <!-- Orange -->
+        <button type="button" 
+                value="#f97316" 
+                (click)="ChangeBg($event)" 
+                class="py-2.5 px-4 bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm">
+          Orange
+        </button>
+        <!-- Yellow -->
+        <button type="button" 
+                value="#eab308" 
+                (click)="ChangeBg($event)" 
+                class="py-2.5 px-4 bg-yellow-500 hover:bg-yellow-600 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm">
+          Yellow
+        </button>
+        <!-- Dark Slate -->
+        <button type="button" 
+                value="#1e293b" 
+                (click)="ChangeBg($event)" 
+                class="py-2.5 px-4 bg-slate-800 hover:bg-slate-900 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm">
+          Dark
+        </button>
+        <!-- Pink -->
+        <button type="button" 
+                value="#ec4899" 
+                (click)="ChangeBg($event)" 
+                class="py-2.5 px-4 bg-pink-500 hover:bg-pink-600 text-white font-semibold rounded-xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-sm">
+          Pink
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. Image Select & Resize Section -->
+    <div class="mt-8 pt-8 border-t border-slate-100 text-left">
+      <h4 class="text-slate-700 font-bold text-xs mb-3 uppercase tracking-wider">3. Image Select & Resize</h4>
+      
+      <!-- Image Thumbnails Selector -->
+      <label class="block mb-2 text-slate-500 font-semibold text-xs uppercase tracking-wide">Chọn hình ảnh:</label>
+      <div class="flex gap-3 mb-4 justify-start">
+        <img src="Obito-img.jpg" 
+             (click)="selectedImg = 'Obito-img.jpg'"
+             class="w-16 h-16 rounded-xl object-cover cursor-pointer border-2 transition-all duration-200 transform hover:scale-105"
+             [class.border-indigo-500]="selectedImg === 'Obito-img.jpg'"
+             [class.border-transparent]="selectedImg !== 'Obito-img.jpg'"
+             alt="Obito">
+        <img src="CV.jpg" 
+             (click)="selectedImg = 'CV.jpg'"
+             class="w-16 h-16 rounded-xl object-cover cursor-pointer border-2 transition-all duration-200 transform hover:scale-105"
+             [class.border-indigo-500]="selectedImg === 'CV.jpg'"
+             [class.border-transparent]="selectedImg !== 'CV.jpg'"
+             alt="CV">
+        <img src="CV-img.jpg" 
+             (click)="selectedImg = 'CV-img.jpg'"
+             class="w-16 h-16 rounded-xl object-cover cursor-pointer border-2 transition-all duration-200 transform hover:scale-105"
+             [class.border-indigo-500]="selectedImg === 'CV-img.jpg'"
+             [class.border-transparent]="selectedImg !== 'CV-img.jpg'"
+             alt="CV Profile">
+      </div>
+
+      <!-- Size buttons -->
+      <label class="block mb-2 text-slate-500 font-semibold text-xs uppercase tracking-wide">Chọn kích thước:</label>
+      <div class="flex gap-3 mb-6">
+        <button type="button" 
+                value="100x100" 
+                (click)="ChangeSize($event)"
+                class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold rounded-xl border border-indigo-100 transition-all duration-200 active:scale-95 text-xs shadow-sm">
+          100x100
+        </button>
+        <button type="button" 
+                value="200x200" 
+                (click)="ChangeSize($event)"
+                class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold rounded-xl border border-indigo-100 transition-all duration-200 active:scale-95 text-xs shadow-sm">
+          200x200
+        </button>
+        <button type="button" 
+                value="300x300" 
+                (click)="ChangeSize($event)"
+                class="flex-1 py-2 px-3 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 font-semibold rounded-xl border border-indigo-100 transition-all duration-200 active:scale-95 text-xs shadow-sm">
+          300x300
+        </button>
+      </div>
+
+      <!-- Image display box -->
+      <div class="p-5 bg-slate-50/50 rounded-2xl border border-dashed border-slate-200 flex items-center justify-center min-h-[150px] overflow-hidden">
+        <img [src]="selectedImg" 
+             [style.width.px]="imgWidth" 
+             [style.height.px]="imgHeight"
+             class="rounded-xl shadow-lg border-2 border-white object-cover transition-all duration-300" 
+             alt="Selected Image">
+      </div>
+    </div>
+  </div>
+</div>
+
+@if (showAlert) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm transition-all duration-300">
+    <div class="bg-white rounded-3xl p-6 shadow-2xl max-w-sm w-full mx-4 border border-slate-100 transform scale-100 transition-all duration-300 animate-[bounce_0.5s_ease-out_1]">
+      <div class="flex flex-col items-center text-center">
+        <!-- Icon -->
+        <div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mb-4 text-blue-500">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-8 h-8">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          </svg>
+        </div>
+        
+        <!-- Header -->
+        <h3 class="text-lg font-bold text-slate-800 mb-2">Thông Báo</h3>
+        
+        <!-- Message -->
+        <p class="text-sm text-slate-600 mb-6 px-2 leading-relaxed">
+          {{ alertMessage }}
+        </p>
+        
+        <!-- Button -->
+        <button type="button"
+                (click)="closeAlert()"
+                class="w-full py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white font-semibold rounded-xl transition-all duration-150 active:scale-95 shadow-md shadow-blue-500/20">
+          Đóng
+        </button>
+      </div>
+    </div>
+  </div>
+}
